@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Taste Restaurant</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#0f0f0f;
+color:white;
+}
+
+/* NAVBAR */
+
+header{
+position:fixed;
+top:0;
+width:100%;
+background:#1b1b1b;
+padding:15px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:1000;
+}
+
+.logo{
+font-size:24px;
+font-weight:600;
+color:#ffb347;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+}
+
+nav ul li{
+margin-left:25px;
+}
+
+nav ul li a{
+text-decoration:none;
+color:white;
+transition:0.3s;
+}
+
+nav ul li a:hover{
+color:#ffb347;
+}
+
+.menu-toggle{
+display:none;
+font-size:26px;
+cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+height:100vh;
+background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+url("https://images.unsplash.com/photo-1504674900247-0877df9cc836");
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
+}
+
+.hero h1{
+font-size:55px;
+color:#ffb347;
+}
+
+.hero p{
+margin:15px 0;
+font-size:18px;
+}
+
+.hero button{
+padding:12px 25px;
+background:#ffb347;
+border:none;
+cursor:pointer;
+font-weight:600;
+border-radius:6px;
+}
+
+/* SECTIONS */
+
+section{
+padding:100px 10%;
+}
+
+.section-title{
+text-align:center;
+font-size:38px;
+margin-bottom:40px;
+color:#ffb347;
+}
+
+/* MENU */
+
+.menu-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+}
+
+.menu-item{
+background:#1b1b1b;
+padding:20px;
+border-radius:10px;
+text-align:center;
+transition:0.3s;
+}
+
+.menu-item:hover{
+transform:translateY(-10px);
+}
+
+.price{
+color:#ffb347;
+margin:10px 0;
+}
+
+.menu-item button{
+padding:8px 15px;
+border:none;
+background:#ffb347;
+cursor:pointer;
+}
+
+/* CART */
+
+.cart{
+position:fixed;
+right:20px;
+bottom:20px;
+background:#ffb347;
+color:black;
+padding:12px 20px;
+border-radius:25px;
+cursor:pointer;
+font-weight:600;
+}
+
+/* GALLERY */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
+}
+
+.gallery img{
+width:100%;
+height:220px;
+object-fit:cover;
+border-radius:8px;
+transition:0.3s;
+}
+
+.gallery img:hover{
+transform:scale(1.08);
+}
+
+/* FORMS */
+
+form input, form textarea, form select{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:none;
+border-radius:5px;
+}
+
+form button{
+padding:12px;
+border:none;
+background:#ffb347;
+cursor:pointer;
+font-weight:600;
+}
+
+/* RESERVATION */
+
+.reservation{
+background:#1b1b1b;
+padding:30px;
+border-radius:10px;
+max-width:500px;
+margin:auto;
+}
+
+/* CONTACT */
+
+.contact-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+}
+
+/* FOOTER */
+
+footer{
+text-align:center;
+background:#1b1b1b;
+padding:20px;
+margin-top:40px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+nav ul{
+position:absolute;
+top:70px;
+right:-100%;
+flex-direction:column;
+background:#1b1b1b;
+width:200px;
+transition:0.3s;
+}
+
+nav ul.active{
+right:0;
+}
+
+nav ul li{
+margin:20px;
+}
+
+.menu-toggle{
+display:block;
+}
+
+.hero h1{
+font-size:35px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">Royal Taste</div>
+
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+<nav>
+<ul id="nav">
+<li><a href="#home">Home</a></li>
+<li><a href="#menu">Menu</a></li>
+<li><a href="#gallery">Gallery</a></li>
+<li><a href="#reservation">Reservation</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+<div>
+<h1>Welcome to Royal Taste</h1>
+<p>Delicious Food • Fresh Ingredients • Cozy Place</p>
+<button onclick="scrollMenu()">View Menu</button>
+</div>
+
+</section>
+
+<!-- MENU -->
+
+<section id="menu">
+
+<h2 class="section-title">Our Menu</h2>
+
+<div class="menu-grid">
+
+<div class="menu-item">
+<h3>Pizza</h3>
+<div class="price">₹299</div>
+<button onclick="addToCart(299)">Add to Cart</button>
+</div>
+
+<div class="menu-item">
+<h3>Burger</h3>
+<div class="price">₹149</div>
+<button onclick="addToCart(149)">Add to Cart</button>
+</div>
+
+<div class="menu-item">
+<h3>Pasta</h3>
+<div class="price">₹249</div>
+<button onclick="addToCart(249)">Add to Cart</button>
+</div>
+
+<div class="menu-item">
+<h3>Sandwich</h3>
+<div class="price">₹129</div>
+<button onclick="addToCart(129)">Add to Cart</button>
+</div>
+
+<div class="menu-item">
+<h3>Paneer Tikka</h3>
+<div class="price">₹199</div>
+<button onclick="addToCart(199)">Add to Cart</button>
+</div>
+
+<div class="menu-item">
+<h3>Chocolate Cake</h3>
+<div class="price">₹179</div>
+<button onclick="addToCart(179)">Add to Cart</button>
+</div>
+
+</div>
+
+</section>
+
+<div class="cart" onclick="showCart()">
+🛒 Cart Total: ₹<span id="cartTotal">0</span>
+</div>
+
+<!-- GALLERY -->
+
+<section id="gallery">
+
+<h2 class="section-title">Food Gallery</h2>
+
+<div class="gallery">
+
+<img src="https://images.unsplash.com/photo-1550547660-d9450f859349">
+<img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
+<img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
+<img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836">
+
+</div>
+
+</section>
+
+<!-- RESERVATION -->
+
+<section id="reservation">
+
+<h2 class="section-title">Reserve a Table</h2>
+
+<div class="reservation">
+
+<form onsubmit="reserveTable()">
+
+<input type="text" placeholder="Name" required>
+<input type="email" placeholder="Email" required>
+<input type="date" required>
+<input type="time" required>
+
+<select required>
+<option>Guests</option>
+<option>1 Person</option>
+<option>2 People</option>
+<option>4 People</option>
+<option>6+ People</option>
+</select>
+
+<button type="submit">Book Table</button>
+
+</form>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<h2 class="section-title">Contact Us</h2>
+
+<div class="contact-grid">
+
+<div>
+<h3>Visit Us</h3>
+<p>Aurangabad, Maharashtra</p>
+<p>Phone: +91 9876543210</p>
+<p>Email: info@royaltaste.com</p>
+</div>
+
+<form onsubmit="contactMsg()">
+
+<input type="text" placeholder="Your Name" required>
+<input type="email" placeholder="Email" required>
+<textarea rows="5" placeholder="Message" required></textarea>
+<button type="submit">Send</button>
+
+</form>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>© 2026 Royal Taste Restaurant</p>
+
+</footer>
+
+<script>
+
+let total=0
+
+function addToCart(price){
+total+=price
+document.getElementById("cartTotal").innerText=total
+alert("Item added to cart")
+}
+
+function showCart(){
+alert("Total Bill: ₹"+total)
+}
+
+function toggleMenu(){
+document.getElementById("nav").classList.toggle("active")
+}
+
+function scrollMenu(){
+document.getElementById("menu").scrollIntoView({behavior:"smooth"})
+}
+
+function reserveTable(){
+alert("Table reserved successfully!")
+event.preventDefault()
+}
+
+function contactMsg(){
+alert("Message sent successfully!")
+event.preventDefault()
+}
+
+</script>
+
+</body>
+</html>
